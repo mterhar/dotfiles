@@ -1,0 +1,8 @@
+{
+    "telemetry.enableTelemetry": false,
+    "editor.fontFamily": "'Cascadia Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.tabSize": 2,
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "editor.fontLigatures": true
+}

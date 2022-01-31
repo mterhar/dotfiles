@@ -1,0 +1,8 @@
+pages:
+  script:
+    - tar --exclude './.git' --exclude './public' -czvf public/dot.tgz .
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

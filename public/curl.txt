@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+####################################
+#                                  #
+#  Welcome to Mike's Dotfiles!     #
+#  curl -SsL https://mjt.sh | sh   #
+#                                  #
+####################################
+
+set -o nounset -o pipefail -o errexit
+
+main() {
+    DOTPATH=~/dotfiles
+    REPO_URL=https://gitlab.com/mterhar/dotfiles.git
+
+    if [ -x "`which git`" ] ; then
+        git clone --depth 1 "$REPO_URL" "$DOTPATH"
+    elif [ -x "`which curl`" ] || [ -x "`which wget`" ] ; then
+        tarball=https://mjt.sh/dot.tgz
+        if [ -x "`which curl`" ] ; then
+            curl -LO "$tarball"
+        elif [ -x "`which wget`" ] ; then
+            wget "$tarball"
+        fi 
+        mkdir -p "$DOTPATH"
+        tar xvzf dot.tgz --directory "$DOTPATH"
+    else
+        echo "curl or wget required"
+    fi
+
+    cd "$DOTPATH"
+    if [ $? -ne 0 ]; then
+        echo "not found: $DOTPATH"
+    fi
+
+    bash -c ./install.sh
+}
+
+main
