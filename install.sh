@@ -37,6 +37,11 @@ fi
 
 mkdir -p ~/.vim_backup
 
+if [ -z "$CODER_ASSETS_ROOT" ]; then
+  echo "insalling gitlens"
+  ${CODER_ASSETS_ROOT}/code-server/bin/code-server --install-extension ${DOTFILES_DIR}/extensions/eamodio.gitlens-11.7.0.vsix
+fi
+
 if [ "$CODER_RUNTIME" != "kubernetes/sysbox" ]; then
   echo "no CVM tuntime: no GPG setup"
   exit 0
