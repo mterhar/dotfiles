@@ -5,9 +5,14 @@ package tui
 import (
 	"os"
 	"syscall"
+	"time"
 
 	"github.com/junegunn/fzf/src/util"
 	"golang.org/x/sys/windows"
+)
+
+const (
+	timeoutInterval = 10
 )
 
 var (
@@ -60,7 +65,7 @@ func (r *LightRenderer) initPlatform() error {
 
 	// channel for non-blocking reads. Buffer to make sure
 	// we get the ESC sets:
-	r.ttyinChannel = make(chan byte, 12)
+	r.ttyinChannel = make(chan byte, 1024)
 
 	// the following allows for non-blocking IO.
 	// syscall.SetNonblock() is a NOOP under Windows.
@@ -130,7 +135,7 @@ func (r *LightRenderer) getch(nonblock bool) (int, bool) {
 		select {
 		case bc := <-r.ttyinChannel:
 			return int(bc), true
-		default:
+		case <-time.After(timeoutInterval * time.Millisecond):
 			return 0, false
 		}
 	} else {

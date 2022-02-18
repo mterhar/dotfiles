@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -f "~/.fzf" ] 
-then
-  echo "fzf already present." 
-else
-  cp -rf ${DOTFILES_DIR}/.fzf ~/.fzf
-  ~/.fzf/install --all
-fi
-
 if [ -z "$CODER_ASSETS_ROOT" ]; then
   echo "no coder, no extensions"
 else

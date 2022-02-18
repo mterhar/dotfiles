@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/junegunn/fzf/src"
+	fzf "github.com/junegunn/fzf/src"
 	"github.com/junegunn/fzf/src/protector"
 )
 
-var version string = "0.26"
+var version string = "0.29"
 var revision string = "devel"
 
 func main() {

@@ -32,6 +32,14 @@ cp -f ${DOTFILES_DIR}/.gitconfig ~/.gitconfig
 git config --file ~/.gitconfig.local user.name "Mike Terhar"
 git config --file ~/.gitconfig.local user.email "mike@coder.com"
 
+if [ -f "~/.fzf" ]
+then
+  echo "fzf already present."
+else
+  cp -rf ${DOTFILES_DIR}/.fzf ~/.fzf
+  ~/.fzf/install --all
+fi
+
 mkdir -p ~/.vim_backup
 
 echo "need a new gpg key before re-enabling this."
