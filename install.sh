@@ -2,19 +2,27 @@
 DOTFILES_DIR=$(pwd)
 builddt=$(date +"%Y%m%d-%H%M%S")
 
+case "$OSTYPE" in
+  solaris*) echo "SOLARIS" ;;
+  darwin*)  
+    echo "MacOS"
+    . $DOTFILES_DIR/macos/configure.sh
+    ;;
+  linux*)   
+    echo "LINUX"
+    . $DOTFILES_DIR/linux/configure.sh
+    ;;
+  bsd*)     echo "BSD" ;;
+  msys*)    echo "WINDOWS" ;;
+  cygwin*)  echo "ALSO WINDOWS" ;;
+  *)        echo "unknown: $OSTYPE" ;;
+esac
+
 if [ -f "~/.local/share/code-server/User/settings.json" ] 
 then
   echo "VS Code settings are already present." 
 else
   cp -rf ${DOTFILES_DIR}/.local ~/.local
-fi
-
-if [ -f "~/.fzf" ] 
-then
-  echo "fzf already present." 
-else
-  cp -rf ${DOTFILES_DIR}/.fzf ~/.fzf
-  ~/.fzf/install --all
 fi
 
 cp -rf ${DOTFILES_DIR}/.fonts ~/.fonts
@@ -24,33 +32,11 @@ cp -f ${DOTFILES_DIR}/.gitconfig ~/.gitconfig
 git config --file ~/.gitconfig.local user.name "Mike Terhar"
 git config --file ~/.gitconfig.local user.email "mike@coder.com"
 
-if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
-  cp -f ${DOTFILES_DIR}/.zshrc ~/.zshrc
-  if sudo -n true 2>/dev/null; then
-    sudo chsh -s $(which zsh) $(whoami)
-  else
-    echo "run chsh -s $(which zsh) to change your shell, I couldn't do it for you"
-  fi
-else
-  echo "zsh not installed, not configured."
-fi
-
 mkdir -p ~/.vim_backup
 
-if [ -z "$CODER_ASSETS_ROOT" ]; then
-  echo "no coder, no extensions"
-else
-  echo "insalling gitlens"
-  ${CODER_ASSETS_ROOT}/code-server/bin/code-server --install-extension ${DOTFILES_DIR}/extensions/eamodio.gitlens-11.7.0.vsix
-fi
+echo "need a new gpg key before re-enabling this."
 
-if [ "$CODER_RUNTIME" != "kubernetes/sysbox" ]; then
-  echo "no CVM tuntime: no GPG setup"
-  exit 0
-fi
-
-echo "CVM runtime detected: configuring GPG"
-
+exit 0 
 if hash gpg 2>/dev/null; then
   mkdir -p ~/.gnupg
   chmod 700 ~/.gnupg
