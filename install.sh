@@ -26,8 +26,10 @@ else
 fi
 
 cp -rf ${DOTFILES_DIR}/.fonts ~/.fonts
-cp -f ${DOTFILES_DIR}/.vimrc ~/.vimrc
 cp -f ${DOTFILES_DIR}/.gitconfig ~/.gitconfig
+cp -f ${DOTFILES_DIR}/.vimrc ~/.vimrc
+cp -f ${DOTFILES_DIR}/.zshrc ~/.zshrc
+cp -f ${DOTFILES_DIR}/.bashrc ~/.bashrc
 
 git config --file ~/.gitconfig.local user.name "Mike Terhar"
 git config --file ~/.gitconfig.local user.email "mike@coder.com"
