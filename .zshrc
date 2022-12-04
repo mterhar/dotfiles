@@ -122,10 +122,6 @@ else
     alias ls="ls --color"
 fi
 
-if [ -n "$CODER_ASSETS_ROOT" ]; then
-  alias code="$CODER_ASSETS_ROOT/code-server/bin/code-server"
-fi
-
 alias v="vim"
 
 ## HISTORY

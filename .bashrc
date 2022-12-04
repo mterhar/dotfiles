@@ -15,10 +15,6 @@ esac
 
 alias ll='ls -la'
 
-if [ -z $CODER_ASSETS_ROOT ]; then
-  alias code="$CODER_ASSETS_ROOT/code-server/bin/code-server"
-fi
-
 export EDITOR=vim
 
 if ! which __git_ps1 2>&1 /dev/null; then

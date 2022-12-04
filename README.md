@@ -6,8 +6,6 @@ Easy usage: `curl -FSsl https://mjt.sh`
 
 Configuration files for `vim`, `git`, `bash`, `zsh`, and `fzf`.
 
-Some GPG stuff is also in there but is optional and only used for Coder environments. 
-
 ## Clean-up
 
 Occasionally it's good to clean up a repo like this one since history is less important after stuff has been working for a while. 
